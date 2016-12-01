@@ -271,7 +271,8 @@ class Analyse:
                  ('1000-5000', data[5]),
                  ('500-100', data[6]),
                  ('100-500', data[7]),
-                 ('0-100', data[8])])
+                 #('0-100', data[8])
+                 ])
 
             # 保存到redis
             self.redis_con.set("agree_count", result, 9600)
@@ -317,7 +318,8 @@ class Analyse:
                  ('1000-5000', data[5]),
                  ('500-100', data[6]),
                  ('100-500', data[7]),
-                 ('0-100', data[8])])
+                 #('0-100', data[8])
+                 ])
 
             # 保存到redis
             self.redis_con.set("follower_count", result, 9600)
