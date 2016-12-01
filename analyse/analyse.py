@@ -69,9 +69,12 @@ class Analyse:
     def get_sex(self):
         # 检查是否缓存
         try:
-            result = json.loads(self.redis_con.get("sex_num").decode('utf-8'), object_pairs_hook=OrderedDict)
-        except:
+            result = eval(self.redis_con.get("sex_num").decode('utf-8'))
+        except Exception as err:
+            print(err)
+            traceback.print_exc()
             result = None
+        print(result)
         if not result:
             sql = '''
                 SELECT
@@ -101,7 +104,7 @@ class Analyse:
     def get_school_count(self):
         # 检查是否缓存
         try:
-            result = json.loads(self.redis_con.get("school_count").decode('utf-8'), object_pairs_hook=OrderedDict)
+            result = eval(self.redis_con.get("school_count").decode('utf-8'))
         except:
             result = None
         if not result:
@@ -135,7 +138,7 @@ class Analyse:
     def get_trade_count(self):
         # 检查是否缓存
         try:
-            result = json.loads(self.redis_con.get("trade_count").decode('utf-8'), object_pairs_hook=OrderedDict)
+            result = eval(self.redis_con.get("trade_count").decode('utf-8'))
         except:
             result = None
         if not result:
@@ -169,7 +172,7 @@ class Analyse:
     def get_location_count(self):
         # 检查是否缓存
         try:
-            result = json.loads(self.redis_con.get("location_count").decode('utf-8'), object_pairs_hook=OrderedDict)
+            result = eval(self.redis_con.get("location_count").decode('utf-8'))
         except:
             result = None
         if not result:
@@ -203,7 +206,7 @@ class Analyse:
     def get_company_count(self):
         # 检查是否缓存
         try:
-            result = json.loads(self.redis_con.get("company_count").decode('utf-8'), object_pairs_hook=OrderedDict)
+            result = eval(self.redis_con.get("company_count").decode('utf-8'))
         except:
             result = None
         if not result:
@@ -237,7 +240,7 @@ class Analyse:
     def get_agree_count(self):
         # 检查是否缓存
         try:
-            result = json.loads(self.redis_con.get("agree_count").decode('utf-8'), object_pairs_hook=OrderedDict)
+            result = eval(self.redis_con.get("agree_count").decode('utf-8'))
         except:
             result = None
         if not result:
@@ -284,7 +287,7 @@ class Analyse:
     def get_follower_count(self):
         # 检查是否缓存
         try:
-            result = str(self.redis_con.get("follower_count").decode('utf-8'), object_pairs_hook=OrderedDict)
+            result = eval(self.redis_con.get("follower_count").decode('utf-8'))
         except:
             result = None
         if not result:
