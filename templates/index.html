@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>百万知乎用户数据分析</title>
+    <style type="text/css">
+        .loading {
+            display: none;
+            width: 160px;
+            height: 56px;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            line-height: 56px;
+            color: #fff;
+            padding-left: 60px;
+            font-size: 15px;
+            background: #000 url(/static/img/progress.gif) no-repeat 10px 50%;
+            opacity: 0.7;
+            z-index: 9999;
+            -moz-border-radius: 20px;
+            -webkit-border-radius: 20px;
+            border-radius: 20px;
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+        }
+    </style>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!--loading-->
+<div class="loading">loading...</div>
+<!--loading-->
+
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div>
+        <h1 class="">百万知乎用户数据分析</h1>
+        <h4>已获取用户数：<b id="already_get_num">加载中...</b></h4>
+        <h4>数据更新时间：<b id="update_time">加载中...</b></h4>
+        <p>star me:<a href="https://github.com/kong36088/ZhihuSpider" target="_blank">ZhihuSpider</a></p>
+    </div>
+    <hr>
+
+
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>性别比例</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="sex-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>用户学校分布TOP10</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="school-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>用户行业分布TOP10</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="trade-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>用户地区分布TOP10</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="location-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>用户公司分布TOP10</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="company-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>获取赞同数分布</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="agree-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>用户粉丝数分布</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="follower-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/jquery-1.12.4.min.js"></script>
+<script src="/static/js/Chart.min.js"></script>
+<script src="/static/js/function.js"></script>
+<script src="/static/js/admin_http.js"></script>
+<script src="/static/js/admin_http_view.js"></script>
+<script src="/static/js/index.js"></script>
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        init();
+
+        function init() {
+            getData.count();
+            getData.setSex();
+            getData.setSchool();
+            getData.setTrade();
+            getData.setLocation();
+            getData.setCompany();
+            getData.setAgree();
+            getData.setFollower();
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>
