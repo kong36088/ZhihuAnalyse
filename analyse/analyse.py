@@ -79,8 +79,8 @@ class Analyse:
             sql = '''
                 SELECT
                 (SELECT COUNT(*) FROM user WHERE gender = 1) AS male,
-                (SELECT COUNT(*) FROM user WHERE gender = 2) AS female,
-                (SELECT COUNT(*) FROM user WHERE gender = 3) AS other,
+                (SELECT COUNT(*) FROM user WHERE gender = 0) AS female,
+                (SELECT COUNT(*) FROM user WHERE gender = -1) AS other,
                 (SELECT COUNT(*) FROM user) AS total
             '''
             try:
@@ -212,7 +212,7 @@ class Analyse:
         if not result:
             sql = '''
                  SELECT company,COUNT(*) FROM user
-                 WHERE company <> '' AND company NOT LIKE "%学生%" AND company <> '无' AND company <> '自由职业' AND company <> '待业'
+                 WHERE company <> '' AND company NOT LIKE "%学生%" AND company <> '无' AND company <> '自由职业' AND company <> '待业' and company <> '互联网'
                  GROUP BY company
                  ORDER BY COUNT(*) DESC
                  LIMIT 10
