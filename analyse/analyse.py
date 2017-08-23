@@ -46,7 +46,7 @@ class Analyse:
             result = None
         if not result:
             sql = '''
-                SELECT COUNT(*),(SELECT update_time FROM user ORDER BY update_time DESC LIMIT 1 ) FROM user
+                SELECT COUNT(*),(SELECT max(update_time) FROM user) FROM user
             '''
             try:
                 self.db_cursor.execute(sql)

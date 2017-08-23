@@ -13,7 +13,6 @@ http = {
                 $(".loading").css('display', 'none');
             })
             .error(function (xmlobject, error) {
-                alert('获取数据失败');
             });
     },
     post: function (url, data) {
@@ -23,7 +22,6 @@ http = {
                 $(".loading").css('display', 'none');
             })
             .error(function (xmlobject, error) {
-                alert('获取数据失败');
             });
     },
     put: function (url, data) {
@@ -33,7 +31,6 @@ http = {
                 $(".loading").css('display', 'none');
             })
             .error(function (xmlobject, error) {
-                alert('获取数据失败');
             });
     },
     delete: function (url, data) {
@@ -43,7 +40,6 @@ http = {
                 $(".loading").css('display', 'none');
             })
             .error(function (xmlobject, error) {
-                alert('获取数据失败');
             });
     }
 };
