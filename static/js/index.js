@@ -5,6 +5,8 @@ var sex_c = $("#sex-canvas");
 var sex_canvas = null;
 var school_c = $("#school-canvas");
 var school_canvas = null;
+var nickname_c = $("#nickname-canvas");
+var nickname_canvas = null;
 var trade_c = $("#trade-canvas");
 var trade_canvas = null;
 var location_c = $("#location-canvas");
@@ -245,7 +247,7 @@ zhihuChart = {
             ]
         };
         //新建canvas
-        school_canvas = new Chart(school_c, {
+        nickname_canvas = new Chart(nickname_c, {
             type: 'bar',
             data: d,
         })

@@ -146,4 +146,5 @@ def get_nickname():
 
 
 if __name__ == '__main__':
+    # print(get_nickname())
     app.run(host=config.get('sys', 'listen_ip'), port=config.get('sys', 'listen_port'))
