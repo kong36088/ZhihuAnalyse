@@ -274,7 +274,7 @@ class Analyse:
                  ('1000-5000', data[5]),
                  ('500-100', data[6]),
                  ('100-500', data[7]),
-                 #('0-100', data[8])
+                 # ('0-100', data[8])
                  ])
 
             # 保存到redis
@@ -321,11 +321,44 @@ class Analyse:
                  ('1000-5000', data[5]),
                  ('500-100', data[6]),
                  ('100-500', data[7]),
-                 #('0-100', data[8])
+                 # ('0-100', data[8])
                  ])
 
             # 保存到redis
             self.redis_con.set("follower_count", result, 9600)
+
+            return result
+        else:
+            return result
+
+    # 统计昵称排名
+    def get_nickname_count(self):
+        # 检查是否缓存
+        try:
+            result = eval(self.redis_con.get("nickname_count").decode('utf-8'))
+        except:
+            result = None
+        if not result:
+            sql = '''
+                SELECT COUNT(nickname) as c,nickname FROM user 
+                GROUP BY nickname ORDER BY c DESC LIMIT 21
+             '''
+            try:
+                self.db_cursor.execute(sql)
+            except Exception as err:
+                traceback.print_exc()
+                print(err)
+                print("获取名称统计失败")
+                return None
+            data = self.db_cursor.fetchall()
+
+            result = []
+            for index, (count, nickname) in enumerate(data):
+                if nickname != '[已重置]':
+                    result.append((nickname, count))
+            result = OrderedDict(result)
+            # 保存到redis
+            self.redis_con.set("nickname_count", result, 259200)
 
             return result
         else:

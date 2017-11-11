@@ -131,5 +131,19 @@ def get_follower():
     return json_outer.data(result)
 
 
+@app.route('/get_nickname_count')
+def get_nickname():
+    analyse = Analyse()
+    result = {}
+    try:
+        result = analyse.get_nickname_count()
+        if not result:
+            result = {}
+    except Exception as err:
+        traceback.print_exc()
+        print(err)
+    return json_outer.data(result)
+
+
 if __name__ == '__main__':
     app.run(host=config.get('sys', 'listen_ip'), port=config.get('sys', 'listen_port'))

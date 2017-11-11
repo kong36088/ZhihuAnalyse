@@ -20,7 +20,6 @@ getData = {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -34,7 +33,6 @@ getData = {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_sex_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -55,7 +53,6 @@ getData = {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_school_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -72,11 +69,30 @@ getData = {
                 zhihuChart.school(labels, nums, background);
             });
     },
+    setNickname: function () {
+        var labels = [];
+        var nums = [];
+        var background = [];
+        http.get("/get_nickname_count")
+            .success(function (result) {
+                result = parseJson(result)[0];
+                if (result.code == 3) {
+                    for (key in result.data) {
+                        labels.push(key);
+                        nums.push(result.data[key]);
+                        var color_a = getRandom(0);
+                        var color_b = getRandom(0);
+                        var color_c = getRandom(0);
+                        background.push('rgba(' + color_a + ', ' + color_b + ', ' + color_c + ',0.9)')
+                    }
+                }
+                zhihuChart.nickname(labels, nums, background);
+            });
+    },
     setTrade: function () {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_trade_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -97,7 +113,6 @@ getData = {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_location_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -118,7 +133,6 @@ getData = {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_company_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -139,7 +153,6 @@ getData = {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_agree_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -160,7 +173,6 @@ getData = {
         var labels = [];
         var nums = [];
         var background = [];
-        //初始化订单数数据
         http.get("/get_follower_count")
             .success(function (result) {
                 result = parseJson(result)[0];
@@ -209,6 +221,24 @@ zhihuChart = {
             datasets: [
                 {
                     label: '用户学校分布TOP10',
+                    data: nums,
+                    backgroundColor: background
+                }
+            ]
+        };
+        //新建canvas
+        school_canvas = new Chart(school_c, {
+            type: 'bar',
+            data: d,
+        })
+    },
+    //昵称统计
+    nickname: function (labels, nums, background) {
+        var d = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '最常用名称TOP20',
                     data: nums,
                     backgroundColor: background
                 }
@@ -302,7 +332,8 @@ zhihuChart = {
         //新建canvas
         follower_canvas = new Chart(follower_c, {
             type: 'doughnut',
-            data: d,
+            data: d
         })
     },
+
 }
