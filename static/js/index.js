@@ -17,6 +17,8 @@ var agree_c = $("#agree-canvas");
 var agree_canvas = null;
 var follower_c = $("#follower-canvas");
 var follower_canvas = null;
+var job_c = $("#job-canvas");
+var job_canvas = null;
 getData = {
     count: function () {
         var labels = [];
@@ -89,6 +91,26 @@ getData = {
                     }
                 }
                 zhihuChart.nickname(labels, nums, background);
+            });
+    },
+    setJob: function () {
+        var labels = [];
+        var nums = [];
+        var background = [];
+        http.get("/get_job_count")
+            .success(function (result) {
+                result = parseJson(result)[0];
+                if (result.code == 3) {
+                    for (key in result.data) {
+                        labels.push(key);
+                        nums.push(result.data[key]);
+                        var color_a = getRandom(0);
+                        var color_b = getRandom(0);
+                        var color_c = getRandom(0);
+                        background.push('rgba(' + color_a + ', ' + color_b + ', ' + color_c + ',0.9)')
+                    }
+                }
+                zhihuChart.job(labels, nums, background);
             });
     },
     setTrade: function () {
@@ -248,6 +270,23 @@ zhihuChart = {
         };
         //新建canvas
         nickname_canvas = new Chart(nickname_c, {
+            type: 'bar',
+            data: d,
+        })
+    },
+    job: function (labels, nums, background) {
+        var d = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '职业分布TOP20',
+                    data: nums,
+                    backgroundColor: background
+                }
+            ]
+        };
+        //新建canvas
+        job_canvas = new Chart(job_c, {
             type: 'bar',
             data: d,
         })

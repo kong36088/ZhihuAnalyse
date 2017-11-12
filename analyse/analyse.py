@@ -364,6 +364,39 @@ class Analyse:
         else:
             return result
 
+    # 统计职业排名
+    def get_job_count(self):
+        # 检查是否缓存
+        try:
+            result = eval(self.redis_con.get("job_count").decode('utf-8'))
+        except:
+            result = None
+        if not result:
+            sql = '''
+                SELECT COUNT(job) as c,job FROM user 
+                GROUP BY job ORDER BY c DESC LIMIT 21
+             '''
+            try:
+                self.db_cursor.execute(sql)
+            except Exception as err:
+                traceback.print_exc()
+                print(err)
+                print("获取统计失败")
+                return None
+            data = self.db_cursor.fetchall()
+
+            result = []
+            for index, (count, job) in enumerate(data):
+                if job != '':
+                    result.append((job, count))
+            result = OrderedDict(result)
+            # 保存到redis
+            self.redis_con.set("job_count", result, 259200)
+
+            return result
+        else:
+            return result
+
     def __del__(self):
         self.db_cursor.close()
         self.db.commit()

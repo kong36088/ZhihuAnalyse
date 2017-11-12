@@ -145,6 +145,20 @@ def get_nickname():
     return json_outer.data(result)
 
 
+@app.route('/get_job_count')
+def get_job():
+    analyse = Analyse()
+    result = {}
+    try:
+        result = analyse.get_job_count()
+        if not result:
+            result = {}
+    except Exception as err:
+        traceback.print_exc()
+        print(err)
+    return json_outer.data(result)
+
+
 if __name__ == '__main__':
-    # print(get_nickname())
+    # print(get_job())
     app.run(host=config.get('sys', 'listen_ip'), port=config.get('sys', 'listen_port'))

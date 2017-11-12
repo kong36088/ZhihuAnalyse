@@ -96,6 +96,15 @@
         </div>
     </div>
 
+    <div style="display:block;padding:0!important;" class="sheet col-sm-12">
+        <h3>职业分布TOP20</h3>
+        <div class="panel-body col-sm-6" style="max-width:600px;">
+            <div class="canvas">
+                <canvas id="job-canvas" width="100" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
 
     <div style="display:block;padding:0!important;" class="sheet col-sm-12">
         <h3>用户地区分布TOP10</h3>
@@ -156,6 +165,7 @@
             getData.setCompany();
             getData.setAgree();
             getData.setFollower();
+            getData.setJob();
         }
 
     });
