@@ -391,7 +391,7 @@ class Analyse:
                     result.append((job, count))
             result = OrderedDict(result)
             # 保存到redis
-            self.redis_con.set("job_count", result, 259200)
+            self.redis_con.set("job_count", result, 9600)
 
             return result
         else:
